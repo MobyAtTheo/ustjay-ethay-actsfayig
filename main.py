@@ -12,6 +12,7 @@ pigLatinSite = "https://hidden-journey-62459.herokuapp.com/"
 
 
 def get_fact():
+    """get facts from the unkno.com website"""
 
     response = requests.get("http://unkno.com")
 
@@ -36,11 +37,9 @@ def request_pig_latin(**kwargs):
 
 @app.route("/")
 def home():
-    # return "FILL ME!"
-    # return get_fact()
-    return request_pig_latin(input_text="thisisatest")
+    return request_pig_latin(input_text=get_fact())
 
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 6787))
-    app.run(host=listenAddress[1], port=port)
+    app.run(host=listenAddress[0], port=port)
