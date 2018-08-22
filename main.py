@@ -6,6 +6,8 @@ from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
+listenAddress = ["0.0.0.0", "127.0.0.1"]
+
 
 def get_fact():
 
@@ -14,15 +16,15 @@ def get_fact():
     soup = BeautifulSoup(response.content, "html.parser")
     facts = soup.find_all("div", id="content")
 
-    return facts[0].getText()
+    return facts[0].getText().strip()
 
 
-@app.route('/')
+@app.route("/")
 def home():
-    return "FILL ME!"
+    # return "FILL ME!"
+    return get_fact()
 
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 6787))
-    app.run(host='0.0.0.0', port=port)
-
+    app.run(host=listenAddress[1], port=port)
