@@ -8,6 +8,8 @@ app = Flask(__name__)
 
 listenAddress = ["0.0.0.0", "127.0.0.1"]
 
+pigLatinSite = "https://hidden-journey-62459.herokuapp.com/"
+
 
 def get_fact():
 
@@ -19,10 +21,24 @@ def get_fact():
     return facts[0].getText().strip()
 
 
+def request_pig_latin(**kwargs):
+    """Request piglatin transform from piglatinizer site."""
+
+    input_text = kwargs["input_text"]
+
+    res2 = requests.post(
+        pigLatinSite + "piglatinize/", data={"input_text": input_text.lower()}
+    )
+    soup = BeautifulSoup(res2.content, "html.parser")
+
+    return soup.get_text().strip()[37:].capitalize()
+
+
 @app.route("/")
 def home():
     # return "FILL ME!"
-    return get_fact()
+    # return get_fact()
+    return request_pig_latin(input_text="thisisatest")
 
 
 if __name__ == "__main__":
