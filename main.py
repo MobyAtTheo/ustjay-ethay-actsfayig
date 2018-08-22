@@ -50,7 +50,7 @@ def format_pig_latin_link(link=pigLatinSite):
 
     a_href = "<a href=" + link + ">" + link + "</a>"
     page_open = "<html><title>Pig Latin Link</title><body>"
-    content = page_open + "<p>" + link + "<p>" + a_href
+    content = page_open + "<p>" + a_href
     page_close = "</body></html>"
     page = page_open + content + page_close
 
